@@ -2,14 +2,31 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## [0.2.1] - TBD
+### Added
+- configuration of the environment to configs/\*.yaml
+- .gitignore file with the list of cache files
+- optimization and tsa branches
 
-## [0.2] - 2019-04-16
+### Changed
+- structure of the project into resources/ directory
+- paths to applications in Index and README, minor edits
+- correct date of the last commit in CHANGELOG
+
+### Removed
+- SARIMA configurations from configs/
+- python and jupyter-notebook cache files
+
+### Deprecated
+- save/load SARIMA configurations function
+
+## [0.2] - 2019-04-19
 ### Added
 - GJR-GARCH model with unsupervised optimization algorithm
 - ARIMA unsupervised trend and seasonality detection
 - CHANGELOG section for tracking project development
 - Directory ./configs/ for storing parameters of models
-- Methods to save/load SARIMA configuration from *.csv and *.p files
+- Methods to save/load SARIMA configuration from \*.csv and \*.p files
 
 ### Changed
 - Seasonal ARIMA model resources, optimization algorithm

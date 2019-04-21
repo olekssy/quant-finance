@@ -1,28 +1,37 @@
-# Time Series Analysis models
+# Quantitative finance models and algorithms
 
-[v0.2](CHANGELOG.md)
+[v0.2.1](CHANGELOG.md)
 
-Collection of models with optimization algorithms for Time series analysis, algorithmic forecasting and quantitative research.
-
-Models are trained and tested on S&P 500 historical prices.
+Collection of models with optimization algorithms for Time series analysis, algorithmic forecasting, quantitative research and risk-management.
 
 ## Index
+**Optimization models**
+1. [IRR](resources/TBD)
+    - linear asset pricing: YTM, FX income, capital budgeting, floating-rate notes
+    - univariate concave nonlinear optimization via grid search on subintervals
+    - mixed integer programming problem, ready-to-use on [NISQ](https://arxiv.org/abs/1801.00862) devices
 
-**Currently available models and algorithms:**
 
-1. [GJR-GARCH](GJR-GARCH.ipynb)
+**Time series analysis models**
+1. [GJR-GARCH](resources/GJR-GARCH.ipynb)
     - Glosten-Jagannathan-Runkle GARCH(p, o, q)
     - unsupervised optimization of parameters
-    - captures asymmetric shocks (leverage effect) 
-2. [Seasonal ARIMA](Seasonal-ARIMA.ipynb)
+    - captures asymmetric shocks (leverage effect)
+
+
+2. [Seasonal ARIMA](resources/Seasonal-ARIMA.ipynb)
     - ARIMA(p, d, q)x(P, D, Q, s)
     - unsupervised optimization of AR, MA and Seasonal parameters
     - provides one-step-ahead predictions and out-of-sample forecast
-3. [Holt-Winters model](Holt-Winters.ipynb)    
+
+
+3. [Holt-Winters model](resources/Holt-Winters.ipynb)    
     - triple exponential smoothing
     - cross-validation via Conjugate gradient, TNC
     - in-sample prediction and extrapolation
-4. [Smoothing methods](Smoothing-Methods.ipynb)
+
+
+4. [Smoothing methods](resources/Smoothing-Methods.ipynb)
     - Moving average
     - Exponential smoothing
     - Double exponential smoothing
