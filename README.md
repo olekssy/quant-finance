@@ -5,14 +5,14 @@
 Collection of models with optimization algorithms for Time series analysis, algorithmic forecasting, quantitative research and risk-management.
 
 ## Index
-**Optimization models**
-1. [IRR](resources/TBD)
-    - linear asset pricing: YTM, FX income, capital budgeting, floating-rate notes
-    - univariate concave nonlinear optimization via grid search on subintervals
-    - mixed integer programming problem, ready-to-use on [NISQ](https://arxiv.org/abs/1801.00862) devices
+### Optimization models
+1. [Linear Asset Pricing](resources/Linear-asset-pricing.ipynb)
+    - linear asset pricing: FX income, capital budgeting, floating-rate notes
+    - univariate concave nonlinear optimization of IRR-YTM using Brent method and binary grid search on subintervals
+    - available as mixed integer programming problem, ready-to-use on [NISQ](https://arxiv.org/abs/1801.00862) devices
 
 
-**Time series analysis models**
+### Time series analysis models
 1. [GJR-GARCH](resources/GJR-GARCH.ipynb)
     - Glosten-Jagannathan-Runkle GARCH(p, o, q)
     - unsupervised optimization of parameters

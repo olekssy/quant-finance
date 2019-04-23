@@ -158,33 +158,3 @@ def error(data, predict, graph=False):
         plt.axis('tight')
         plt.show()
     return predict_error_ma
-
-
-def save_config(results, path=config_path):
-    """
-        Save configuration of ARIMA(p, d, q)x(P, D, Q, s)
-        to ./config directory as *.csv and *.p
-    """
-    # Index file name with timestamp
-    from datetime import datetime
-    tod = datetime.today().strftime('%Y-%m-%d')
-    full_path = path + 'sarima-' + tod
-
-    # Save result table to *.csv
-    results.to_csv(path_or_buf=full_path + '.csv', index=False)
-
-    # Save config to *.p
-    with open(full_path + '.p', 'wb') as file:
-        pickle.dump(results, file)
-        print('\nSaved ARIMA configuration to {}\n'.format(full_path))
-
-
-def load_config(file_name, path=config_path):
-    """
-        Load configuration of ARIMA(p, d, q)x(P, D, Q, s)
-    """
-    full_path = path + file_name
-    with open(full_path, 'rb') as file:
-        result_table = pickle.load(file)
-        print('\nLoaded ARIMA configuration from', full_path, '\n')
-        return result_table.parameters[0]

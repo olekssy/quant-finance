@@ -2,8 +2,9 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
-## [0.2.1] - TBD
+## [0.2.1] - 2019-04-22
 ### Added
+- Linear asset pricing model (YTM-IRR)
 - configuration of the environment to configs/\*.yaml
 - .gitignore file with the list of cache files
 - optimization and tsa branches
