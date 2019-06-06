@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
+## [0.3] - 2019-06-06
+### Added
+- European option pricing model (Monte-Carlo and Black-Scholes)
+- directory with tutorials to root
+- graphs for select models to README and Index
+- documentation for functions and objects to models
+- graphs into Index and README
+
+### Changed
+- structure of the project into quantfin/ directory
+- models are executable from shell (if __name__=="__main__")
+
+### Deprecated
+- relevant parts of calibration module migrated to HoltWinters, ARIMA respectively
+
 ## [0.2.1] - 2019-04-22
 ### Added
 - Linear asset pricing model (YTM-IRR)

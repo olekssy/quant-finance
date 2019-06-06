@@ -1,4 +1,26 @@
-import pickle
+#  MIT License
+#
+#  Copyright (c) 2019 Oleksii Lialka
+#
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the "Software"), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in all
+#  copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+
+
 import warnings
 from itertools import product
 
@@ -61,8 +83,6 @@ def optimize(series, p, d, q, ps, ds, qs, s, display=True):
     result_table = result_table.sort_values(by='aic', ascending=True).reset_index(drop=True)
     p, q, ps, qs = result_table.parameters[0]
 
-    # Save results
-    save_config(result_table, path=config_path)
 
     print('\nOptimized ARIMA({}, {}, {})x({}, {}, {}, {})\n'
           .format(p, d, q, ps, ds, qs, s))
@@ -158,3 +178,45 @@ def error(data, predict, graph=False):
         plt.axis('tight')
         plt.show()
     return predict_error_ma
+
+
+def main():
+    # Import data
+    path = '../data/^GSPC.csv'
+    series = pd.read_csv(path, index_col=['Date'], skiprows=range(1, 2000), parse_dates=['Date'])
+    data = series['Adj Close']
+
+    # Remove trend and seasonality, find optimal (d, ds, s)
+    d, ds, s = seasonality(data, optimize=True, graph=True)
+
+    # Out-of-sample num of periods to forecast
+    n_predict = 2
+
+    # Initialize ranges of SARIMA parameters
+    p = range(5)
+    q = range(5)
+
+    if ds == 0:
+        ps, qs = [0], [0]
+    else:
+        ps = range(3)
+        qs = range(3)
+
+    # Optimize model
+    p, q, ps, qs = optimize(data, p, d, q, ps, ds, qs, s, display=True)
+
+    # Build optimal ARIMA model
+    model = sm.tsa.statespace.SARIMAX(data, order=(p, d, q), seasonal_order=(ps, ds, qs, s))
+    result = model.filter(model.fit(disp=False).params)
+    result.summary()
+
+    # Make one-step-ahead prediction
+    # Plot predictions against actual data
+    prediction = predict(data, result, n_predict, graph=True)
+
+    # Estimate prediction error
+    mean_abs_error = error(data, prediction, graph=True)
+
+
+if __name__ == '__main__':
+    main()
